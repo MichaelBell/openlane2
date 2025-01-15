@@ -41,6 +41,7 @@ puts "\[INFO\] Running Clock Tree Synthesis…"
 
 set arg_list [list]
 
+lappend arg_list -clk_nets $::env(CLOCK_NET)
 lappend arg_list -buf_list $::env(CTS_CLK_BUFFERS)
 lappend arg_list -root_buf $::env(CTS_ROOT_BUFFER)
 lappend arg_list -sink_clustering_size $::env(CTS_SINK_CLUSTERING_SIZE)
@@ -55,6 +56,7 @@ if { $::env(CTS_DISABLE_POST_PROCESSING) } {
     lappend arg_list -post_cts_disable
 }
 
+puts "\[INFO] Running CTS with args: $arg_list"
 clock_tree_synthesis {*}$arg_list
 
 set_propagated_clock [all_clocks]
